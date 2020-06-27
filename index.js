@@ -3,9 +3,12 @@ const config = dotenv.config().parsed;
 
 const fs = require('fs');
 const axios = require('axios');
+const moment = require('moment');
+
+const date = moment().add(1, 'day').format('YYYY/MM/DD')
 
 const createPage = () => {
-  const title = '2020-MM-DD 小ページ作った2 from js';
+  const title = `${date} 小ページ作った2 from js`;
   const body = fs.readFileSync('./template.html').toString();
   console.log(title, body);
   request(title, body);
