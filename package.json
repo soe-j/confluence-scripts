@@ -1,0 +1,10 @@
+{
+  "name": "confluence",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "soe-j <7115203+soe-j@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
