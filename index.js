@@ -7,8 +7,8 @@ const moment = require('moment');
 const date = moment().add(1, 'day').format('YYYY/MM/DD')
 
 const createPage = () => {
-  const title = `${config.TITLE}_${date}`;
-  const body = config.BODY;
+  const title = `${config.CONFLUENCE_TITLE}_${date}`;
+  const body = config.CONFLUENCE_BODY;
   console.log(title, body);
   request(title, body);
 }
@@ -16,20 +16,20 @@ const createPage = () => {
 const request = (title, body) => {
   axios.request({
     method: 'post',
-    baseURL: `https://${config.DOMAIN}`,
+    baseURL: `https://${config.CONFLUENCE_DOMAIN}`,
     url: '/wiki/rest/api/content',
     auth: {
-      username: config.USER,
-      password: config.TOKEN
+      username: config.CONFLUENCE_USER,
+      password: config.CONFLUENCE_TOKEN
     },
     data: {
       title: title,
       type: "page",
       space: {
-        key: config.SPACE
+        key: config.CONFLUENCE_SPACE
       },
       ancestors: [{
-        id: config.PAGE
+        id: config.CONFLUENCE_PAGE
       }],
       body: {
         storage: {
