@@ -1,5 +1,4 @@
-const dotenv = require('dotenv');
-const config = dotenv.config().parsed;
+require('dotenv').config();
 
 const axios = require('axios');
 const moment = require('moment');
@@ -7,8 +6,8 @@ const moment = require('moment');
 const date = moment().add(1, 'day').format('YYYY/MM/DD')
 
 const createPage = () => {
-  const title = `${config.CONFLUENCE_TITLE}_${date}`;
-  const body = config.CONFLUENCE_BODY;
+  const title = `${process.env.CONFLUENCE_TITLE}_${date}`;
+  const body = process.env.CONFLUENCE_BODY;
   console.log(title, body);
   request(title, body);
 }
@@ -16,20 +15,20 @@ const createPage = () => {
 const request = (title, body) => {
   axios.request({
     method: 'post',
-    baseURL: `https://${config.CONFLUENCE_DOMAIN}`,
+    baseURL: `https://${process.env.CONFLUENCE_DOMAIN}`,
     url: '/wiki/rest/api/content',
     auth: {
-      username: config.CONFLUENCE_USER,
-      password: config.CONFLUENCE_TOKEN
+      username: process.env.CONFLUENCE_USER,
+      password: process.env.CONFLUENCE_TOKEN
     },
     data: {
       title: title,
       type: "page",
       space: {
-        key: config.CONFLUENCE_SPACE
+        key: process.env.CONFLUENCE_SPACE
       },
       ancestors: [{
-        id: config.CONFLUENCE_PAGE
+        id: process.env.CONFLUENCE_PAGE
       }],
       body: {
         storage: {
