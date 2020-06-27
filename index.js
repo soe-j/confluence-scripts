@@ -1,9 +1,17 @@
 const dotenv = require('dotenv');
 const config = dotenv.config().parsed;
 
+const fs = require('fs');
 const axios = require('axios');
 
 const createPage = () => {
+  const title = '2020-MM-DD 小ページ作った2 from js';
+  const body = fs.readFileSync('./template.html').toString();
+  console.log(title, body);
+  request(title, body);
+}
+
+const request = (title, body) => {
   axios.request({
     method: 'post',
     baseURL: `https://${config.DOMAIN}`,
@@ -13,7 +21,7 @@ const createPage = () => {
       password: config.TOKEN
     },
     data: {
-      title: "2020-MM-DD 小ページ作った from js",
+      title: title,
       type: "page",
       space: {
         key: config.SPACE
@@ -23,7 +31,7 @@ const createPage = () => {
       }],
       body: {
         storage: {
-          value: "<h2>すごいページ</h2>すごいページです。とっても。",
+          value: body,
           representation: "storage"
         }
       }
