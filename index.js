@@ -1,15 +1,14 @@
 const dotenv = require('dotenv');
 const config = dotenv.config().parsed;
 
-const fs = require('fs');
 const axios = require('axios');
 const moment = require('moment');
 
 const date = moment().add(1, 'day').format('YYYY/MM/DD')
 
 const createPage = () => {
-  const title = `${date} 小ページ作った2 from js`;
-  const body = fs.readFileSync('./template.html').toString();
+  const title = `${config.TITLE}_${date}`;
+  const body = config.BODY;
   console.log(title, body);
   request(title, body);
 }
