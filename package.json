@@ -5,6 +5,7 @@
   "author": "soe-j <7115203+soe-j@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0"
   }
 }
