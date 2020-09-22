@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+require("dotenv").config();
+const moment = require("moment");
+const createPageFromLast = require("../lib/create-page-from-last");
+
+const ancestorId = process.env.CONFLUENCE_PAGE;
+
+const weekday = moment().weekday();
+if (weekday === 0) return; // 日
+if (weekday === 6) return; // 土
+
+var daysUntilNextBizDay;
+if (weekday === 5) {
+  // 金
+  daysUntilNextBizDay = 3;
+} else {
+  daysUntilNextBizDay = 1;
+}
+
+const date = moment().add(daysUntilNextBizDay, "day").format("YYYY/MM/DD");
+const newTitle = `${process.env.CONFLUENCE_TITLE}_${date}`;
+
+createPageFromLast({ newTitle, ancestorId });

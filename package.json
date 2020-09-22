@@ -2,6 +2,7 @@
   "name": "confluence",
   "version": "1.0.0",
   "main": "index.js",
+  "bin": "create-page-from-last",
   "author": "soe-j <7115203+soe-j@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
