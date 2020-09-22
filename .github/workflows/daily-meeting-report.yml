@@ -28,3 +28,9 @@ jobs:
 
     - run: yarn install
     - run: yarn create-page-from-last
+      env:
+        CONFLUENCE_USER: ${{ secrets.CONFLUENCE_USER }}
+        CONFLUENCE_TOKEN: ${{ secrets.CONFLUENCE_TOKEN }}
+        CONFLUENCE_DOMAIN: ${{ secrets.CONFLUENCE_DOMAIN }}
+        CONFLUENCE_PAGE: ${{ secrets.CONFLUENCE_PAGE }}
+        CONFLUENCE_TITLE: ${{ secrets.CONFLUENCE_TITLE }}
