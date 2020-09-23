@@ -9,7 +9,6 @@ on:
 
 jobs:
   create:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -17,20 +16,20 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v2
-      with: 
-        ref: master
-      
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      - uses: actions/checkout@v2
+        with:
+          ref: master
 
-    - run: yarn install
-    - run: bin/create-page-from-last
-      env:
-        CONFLUENCE_USER: ${{ secrets.CONFLUENCE_USER }}
-        CONFLUENCE_TOKEN: ${{ secrets.CONFLUENCE_TOKEN }}
-        CONFLUENCE_DOMAIN: ${{ secrets.CONFLUENCE_DOMAIN }}
-        CONFLUENCE_PAGE: ${{ secrets.CONFLUENCE_PAGE }}
-        CONFLUENCE_TITLE: ${{ secrets.CONFLUENCE_TITLE }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: yarn install
+      - run: bin/create-page-from-last
+        env:
+          CONFLUENCE_USER: ${{ secrets.CONFLUENCE_USER }}
+          CONFLUENCE_TOKEN: ${{ secrets.CONFLUENCE_TOKEN }}
+          CONFLUENCE_DOMAIN: ${{ secrets.CONFLUENCE_DOMAIN }}
+          CONFLUENCE_PAGE: ${{ secrets.CONFLUENCE_PAGE }}
+          CONFLUENCE_TITLE: ${{ secrets.CONFLUENCE_TITLE }}
