@@ -23,8 +23,26 @@ const date = moment().add(daysUntilNextBizDay, "day").format("YYYY/MM/DD");
 const newTitle = `${process.env.CONFLUENCE_TITLE}_${date}`;
 
 (async () => {
-  const data = await createPageFromLast({ newTitle, ancestorId });
-  notifySlack(
-    `${data.title} を作りました\n${data._links.base}${data._links.editui}`
-  );
+  try {
+    const data = await createPageFromLast({ newTitle, ancestorId });
+
+    console.log({
+      id: data.id,
+      title: data.title,
+      url: `${data._links.base}${data._links.editui}`,
+    });
+
+    notifySlack(
+      `${data.title} を作りました\n${data._links.base}${data._links.editui}`
+    );
+  } catch (err) {
+    if (err.response) console.error(err.response.data);
+    else console.error(err);
+
+    if (err.response && err.response.data && err.response.data.message) {
+      notifySlack(err.response.data.message);
+    }
+
+    throw err;
+  }
 })();
