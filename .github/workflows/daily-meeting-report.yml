@@ -33,3 +33,4 @@ jobs:
           CONFLUENCE_DOMAIN: ${{ secrets.CONFLUENCE_DOMAIN }}
           CONFLUENCE_PAGE: ${{ secrets.CONFLUENCE_PAGE }}
           CONFLUENCE_TITLE: ${{ secrets.CONFLUENCE_TITLE }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

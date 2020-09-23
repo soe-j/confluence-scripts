@@ -3,6 +3,7 @@
 require("dotenv").config();
 const moment = require("moment");
 const createPageFromLast = require("../lib/create-page-from-last");
+const notifySlack = require("../lib/notify-slack");
 
 const ancestorId = process.env.CONFLUENCE_PAGE;
 
@@ -21,4 +22,9 @@ if (weekday === 5) {
 const date = moment().add(daysUntilNextBizDay, "day").format("YYYY/MM/DD");
 const newTitle = `${process.env.CONFLUENCE_TITLE}_${date}`;
 
-createPageFromLast({ newTitle, ancestorId });
+(async () => {
+  const data = await createPageFromLast({ newTitle, ancestorId });
+  notifySlack(
+    `${data.title} を作りました\n${data._links.base}${data._links.editui}`
+  );
+})();

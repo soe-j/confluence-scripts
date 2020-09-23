@@ -6,6 +6,7 @@
   "author": "soe-j <7115203+soe-j@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
+    "@slack/webhook": "^5.0.3",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "moment": "^2.27.0"
