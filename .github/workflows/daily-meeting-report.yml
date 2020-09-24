@@ -31,6 +31,7 @@ jobs:
           CONFLUENCE_USER: ${{ secrets.CONFLUENCE_USER }}
           CONFLUENCE_TOKEN: ${{ secrets.CONFLUENCE_TOKEN }}
           CONFLUENCE_DOMAIN: ${{ secrets.CONFLUENCE_DOMAIN }}
+          CONFLUENCE_SPACE: ${{ secrets.CONFLUENCE_SPACE }}
           CONFLUENCE_PAGE: ${{ secrets.CONFLUENCE_PAGE }}
           CONFLUENCE_TITLE: ${{ secrets.CONFLUENCE_TITLE }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
