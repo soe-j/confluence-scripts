@@ -41,6 +41,8 @@ const newTitle = `${process.env.CONFLUENCE_TITLE}_${date}`;
 
     if (err.response && err.response.data && err.response.data.message) {
       notifySlack(err.response.data.message);
+    } else {
+      notifySlack("何かがおかしい...");
     }
 
     throw err;
