@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+require("dotenv").config();
+const moment = require("moment");
+const getLastPage = require("../lib/get-last-page");
+const notifySlack = require("../lib/notify-slack");
+
+const ancestorId = process.env.CONFLUENCE_PAGE;
+
+const weekday = moment().weekday();
+if (weekday === 0) return; // 日
+if (weekday === 6) return; // 土
+
+(async () => {
+  try {
+    const data = await getLastPage({ ancestorId });
+
+    console.log({
+      id: data.id,
+      title: data.title,
+      url: `https://${process.env.CONFLUENCE_DOMAIN}${data._links.webui}`,
+    });
+
+    notifySlack(
+      `本日の朝会議事録 ${data.title}\nhttps://${process.env.CONFLUENCE_DOMAIN}/wiki${data._links.webui}`
+    );
+  } catch (err) {
+    if (err.response) console.error(err.response.data);
+    else console.error(err);
+
+    if (err.response && err.response.data && err.response.data.message) {
+      notifySlack(err.response.data.message);
+    } else {
+      notifySlack("何かがおかしい...");
+    }
+
+    throw err;
+  }
+})();
