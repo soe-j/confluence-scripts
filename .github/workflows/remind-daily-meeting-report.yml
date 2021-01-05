@@ -5,7 +5,7 @@ name: remind daily meeting report
 
 on:
   schedule:
-    - cron: 0 1 * * *
+    - cron: 30 0 * * *
 
 jobs:
   create:
